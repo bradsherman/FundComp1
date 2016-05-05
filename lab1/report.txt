@@ -1,0 +1,18 @@
+	For the first two problems in this report, the programs were very simple and
+straightforward. However, on the last one, I decided to make a tip calculator.
+This program is meant to take two inputs from the user, their bill, and the 
+percentage that they would like to tip, and then calculate their total bill
+and display it to the screen. 
+
+	From the programmer's perspective, this program opens by printing a 
+welcome statement and then declaring two float variables for the bill and 
+the tip percentage. Next, it asks for the user's bill, scans it into the 
+variable "bill", and checks to make sure that the value is positive. Then 
+it does the same thing for the "tip" variable. If the program discovers 
+that a variable is negative, it prints "That is not a valid answer" and 
+exits the program with a return 0 statement. 
+
+	Lastly, a float variable "total" is declared for the final bill. Then 
+the program calculates the total with the formula 
+total = bill*(1+(tip/100)). Then the program displays that total and 
+thanks the user.

@@ -1,0 +1,41 @@
+Brad Sherman
+Fundamentals of Computing 1
+Lab 4 Part 3 Report
+
+
+This program is meant to display five options to the user which will give
+them extra information about the history of Notre Dame football. It will 
+continue to ask the user what they want to know until the user enters a 
+"6" to exit.
+
+At the start of this program, it includes three other files: ndwins.h, 
+ndloss.h, and ndties.h. Then it declares all of the functions I used to 
+perform the various tasks. Then it enters the main function.
+
+In the main function it creates a 200 x 4 array with each row being a year
+starting at 1900 and the first column being the actual year, 2nd being wins,
+3rd losses, and 4th ties. Next there is a block of code commented out that
+I left in so I could print the array to make sure it is made successfully.
+Then it enters a while loop that only exits when the user's choice becomes
+"6". It prints out all of the options from 1-6 and waits for the user's 
+response. For each case, I made a function to run to produce the correct 
+result. If the user enters a number that does not correspond to a choice, 
+the default case will tell them that it did not understand their answer.
+
+In general, each function is fairly similar. J is initialized in order to 
+parse through the ndfootball 2D array, and then depending on what choice 
+was selected, the function searches for and prints different things. For
+example, in choice 1, the user wants all the undefeated seasons. So, in 
+case 1 of my switch statement, I simply ran the undefeated function. In 
+that function, it searches through ndfootball looking for all of the seasons
+in which the loss row (index 2) are equal to 0. If so, it increments m 
+so that I have a way of keeping track of how many undefeated seasons there
+are, and a way of making a new line after every 5 seasons printed. The other
+functions are very similar to that one. 
+
+I checked this program for correctness using the wikipedia link in the lab
+description. When I ran choice 1, I checked to make sure that every year 
+that was printed matched every year that Notre Dame had 0 losses on the 
+wikipedia page. I repeated this process for every season with a tie, the minwins
+and minlosses functions, and the findrecord function. I checked each for
+several different inputs if it changed the output. 

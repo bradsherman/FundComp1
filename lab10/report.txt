@@ -1,0 +1,9 @@
+Brad Sherman
+Fundamentals of Computing 1
+Game of Life Lab
+
+From the user's perspective, this program can run with either an input file given on the command line or by manually entering coordinates. The user has the option to add and remove cells, advance one generation, or play forever.
+
+Internally, the program starts by initializing the board and other variables. Then it checks to see if there was an input file or not, and splits the data entry into two options depending on how the user started the program. If the user wants to play manually, the program will continually print their options and take in a letter to decide which function to run. If the user entered an input file, the program will open that and use the contents of that file to change the board how the user desires. 
+
+I verified the correct output of this program by running it multiple times and also looking at common patterns found in the game of life and making sure they worked on my version.

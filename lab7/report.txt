@@ -1,0 +1,11 @@
+Brad Sherman
+Fundamentals of Computing 1
+Lab 7 Report
+
+From the user perspective, they have a few different ways to control the animation. The first thing they see is a large white circle with smaller white circles rotating around the circle at a random speed and direction. There are instructions in the middle of the white circle telling them how to change the animation. They can press 's' to change the circles to squares or 't' to change the individual shapes to triangles. They can also left click to change the speed of the individual objects, and right click to change the speed of the rotation of the indiviudal shapes. Lastly, they can press 'q' to quit.
+
+Internally, the program starts by declaring four functions, new_omega, make_circles, make_squares, and make_triangles. Then it goes into the main function and declares a few variables used to keep track of the positions and speeds of all of the shapes. Then it opens the graphics window and prints the big white circle and the instructions for the user. Next, it updates big_dtheta (the speed of the shapes going around the white circle) and small_dtheta (the speed of the individual movement of the smaller shapes). Then the program enters a switch statement with the switch variable c. C decides whether a new shape should be drawn or if any of the speeds need to be changed. If the user right or left clicks, the program calls the new_omega function to give a new random omega to either the rotation of all the shapes or their individual movement. If the user presses 't', 's', or 'c' then the program calls the make_triangles, make_squares, or make_circles functions, respectively. Then the program flushes the output to the screen and waits for a bit. Lastly, there is an if statement to catch the user input and assign it to c.
+
+For each of the making shapes functions, a for loop is used to draw eight shapes around the circle. The make squares and make triangles functions are different because they include special movement of each shape based on where they are on the big white circle. Their lengths change based on small_dtheta, while their actual position on the circle changes based on big_dtheta. 
+
+I verified that the output of this program is correct by running it many times and checking that all of the input I give produced the correct change in the graphics that I wanted to happen. 

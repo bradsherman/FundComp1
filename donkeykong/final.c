@@ -1,0 +1,159 @@
+// Brad Sherman
+// Fundamentals of Computing 1
+// Final Project
+// Donkey Kong Main
+
+#include <stdio.h>
+#include "gfx5.h"
+#include "gfxe.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include "finalfunc.h"
+
+int main( void ) {
+	// Initialize Variables
+	int currentTime;
+	int xsize = 600, ysize = 700;
+	double deltat = .01;
+	int wait = 10000;
+	char c;
+	int dir = 0; // direction mario is moving on ladders
+	int counter = 0; // counter used for mario jumping and falling
+	int *t = &counter;
+	int count = 0; // counter used for the barrels falling
+	int *barrelt = &count;
+	
+	// Open Window
+	gfx_open( xsize, ysize, "Donkey Kong" );
+
+	// Initialize Rails
+	double railAngle = .0827; // 5 degrees
+	int railWidth = 20;
+
+	// Initialize Ladders
+	double ladderWidth = 30;	
+
+	// Initialize Donkey Kong
+	Kong kong, *k = &kong;
+	initializeKong( k, railWidth, ysize );
+
+	// Initialize Mario
+	Mario mario, *m = &mario;
+	initializeMario( m, xsize, ysize, railWidth );
+
+	// Initialize Barrels
+	int maxBarrels = 6;
+	struct Barrel_s Barrels[maxBarrels];
+	int numBarrels = 0;
+	initializeBarrels( Barrels, k, ysize, maxBarrels, railWidth, railAngle, deltat );
+	
+	// Initialize Peach
+	Peach peach, *p = &peach;
+	initializePeach( p, xsize, ysize, ladderWidth, railWidth );
+	
+	c = startScreen( xsize );
+
+	int startTime = time(NULL);
+	while( c != 'q' ) {
+		gfx_clear_color( 0, 0, 0);
+		gfx_clear();
+		switch( c ) {
+			case 'S':
+				// Move right if not falling, jumping, or on ladder
+				if( m->onLadder || m->falling == 1 || m->jump ) break;
+				moveRight(m, xsize, ysize, railAngle, railWidth,deltat);
+				break;
+			case 'Q':
+				// Move left if not falling, jumping, or on ladder
+				if( m->onLadder || m->falling == 1 || m->jump ) break;
+				moveLeft(m, xsize, railWidth);
+				break;
+			case 'R':
+				// Go up on ladder
+				dir = 1;
+				if( m->falling == 1 || m->jump ) break;
+				checkPosition(m, xsize, ysize, railAngle, railWidth, ladderWidth, dir);
+				ladderMovement(m, xsize, ysize, railWidth, railAngle,  deltat );
+				break;
+			case 'T':
+				// Go down on ladder
+				dir = 2;
+				if( m->falling == 1 || m->jump ) break;
+				checkPosition(m, xsize, ysize, railAngle, railWidth, ladderWidth, dir);
+				ladderMovement(m, xsize, ysize, railWidth, railAngle, deltat);
+				break;
+			case 32:
+				if( m->jump || m->onLadder || m->falling ) break; 
+				// prevents double jumps, and reset of originalHeight, and jumping off ladders
+				m->jump = 1;
+				break;
+			default:
+				break;
+		} 
+
+		currentTime = time(NULL);
+		// Add a new barrel every 3 seconds
+		if( (currentTime-startTime) % 3 == 0 && numBarrels < maxBarrels ) numBarrels = (currentTime-startTime)/3; 
+		// Set mario's movement
+		if( !m->jump && !(m->falling)){
+			m->dx = m->vx*deltat;
+			m->dy = m->dx*sin(railAngle);
+		} if( m->jump ) {
+			m->vy = 294-9.8*counter;
+			m->dy = m->vy*deltat;
+			m->ypos = m->ypos - m->dy;
+			counter++;
+		} if( m->falling ) checkFall(m, deltat, t, xsize, ysize, railWidth, railAngle);
+		// Draw Game
+		drawmarioHeads( xsize, m->lives );
+		drawLadders( xsize, ysize, railAngle, railWidth, ladderWidth );
+		drawRails( xsize,ysize,railAngle,railWidth );
+		drawMario( m->xpos, m->ypos, m->orientation );	
+		drawKong( k->xpos, k->ypos, k->orientation );
+		drawPeach( peach.xpos, peach.ypos, peach.orientation );
+		drawBarrels( Barrels, numBarrels, xsize, ysize, railWidth, railAngle, deltat, barrelt );
+		// Player pauses
+		if( c == 'p'){
+			c = pauseGame( xsize, ysize, c );
+		}
+		// Player wins
+		if( m->level == 5 ) {
+			winScreen( xsize, ysize );
+			return 0;
+		}
+		// Check for Collisions
+		int j;
+		for( j = 0; j < numBarrels; j++ ) {
+			if( checkCollision(m, Barrels[j], numBarrels) ) {
+				m->lives = m->lives - 1;
+				// Player loses
+				if( m->lives == 0 ) {
+					loseScreen( xsize, ysize );
+					return 0;
+				}else {
+					// Decrease number of lives
+					numBarrels = 0;
+					m->jump = 0;
+					decreaseLives( m, Barrels, xsize, ysize, maxBarrels );
+					startTime = time(NULL);
+				}
+			}
+		}
+		// After jump is executed, return to original height
+		if( counter == 61 ) {
+			m->ypos = returnHeight( m, xsize, ysize, railWidth, railAngle );
+			m->jump = 0;
+			counter = 0;
+			m->dy = m->dx*sin(railAngle);
+		}
+		gfx_flush();
+		usleep(wait);
+		c = 'z'; // Reset c
+		if( gfx_event_waiting() ){ 
+			c = gfx_wait();
+		}
+	}
+	return 0;
+}

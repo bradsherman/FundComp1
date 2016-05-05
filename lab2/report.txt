@@ -1,0 +1,77 @@
+Brad Sherman
+Fundamentals of Computing 1
+Lab 2
+September 9, 2015
+
+Part 1: This program takes the user's input for number of rows and columns to 
+		make a multiplication table of that size. It first initializes the 
+		variables used for rows and columns. If the user enters a negative
+		number, the program will tell them to enter a positive number and end.
+		
+		The program then prints the first row of the table separately because of 
+		the "*" character in the top left corner. Then the program enters a nested
+		for loop. Starting with the second row, the program prints the row number
+		(x), and then for however many columns the user entered, the program will 
+		print the row number times the column number. Then the program exits the
+		inside loop and goes back for the second iteration of the outside loop.
+		This continues for however many rows the user entered until the table 
+		is complete.
+		
+		This program displays a neat multiplication table for all positive inputs
+		until the product and any row number or column number exceeds 4 digits. 
+		This is because when it prints each entry, the "%4d" character gives it 
+		4 spaces for the number to fill up. So if a number exceeds that it will
+		start to truncate that number.
+		
+		I verified this program for correctness using my extensive knowledge
+		of multiplication.
+		
+		
+Part 2: This program is meant to take three inputs from the user: principal,
+		interest rate, and monthly payment. If any of these inputs are negative
+		the program will continue asking the user for a valid input until they
+		enter one. Also, if the user enters a monthly payment that is less than
+		the initial amount of interest for the first month, the program will let
+		them know that the monthly payment they entered is too small, and it will
+		wait until they enter a large enough payment. 
+		
+		The program then initializes four variables used to keep track of where
+		the money goes: balance (the balance after each payment), interest (the
+		amount of interest earned for a given month), total (the total amount 
+		paid throughout the payback period), and month (the number of months it
+		took to pay off the loan). Then the program prints the column headers,
+		with different numbers of spaces based on how wide the column needs to be.
+		
+		Then a while loop begins, and continues while the balance is greater than 0. 
+		The month is incremented at the beginning of the loop, interest is calculated
+		and added to the total amount paid, and the balance is updated. Once the 
+		balance is less than 0 (monthly payment > previous balance), there is an
+		if statement inside the while loop which automatically makes the balance 
+		0 so the user does not end up with a negative balance. Also during each 
+		iteration of the loop, the program prints the month, payment, interest,
+		and balance for each month, with the appropriate amount of spaces in
+		order to make it look nice. Most of the variables are doubles since they
+		will need to be able to handle decimals.
+		
+		Lastly, after the while loop is done, the program determines the amount
+		of years and months it took to pay off the loan, and prints the total
+		amount paid over the time it took.
+		
+		I verified this program for correctness by entering the same inputs
+		as the lab description, and making sure all the outputs matched, which
+		they did.
+		
+		
+Part 3: This program creates a graph of the function y = (15*cos(x)) + 20 from
+		x = 0 to 100 with increments of .5. Then it prints the X and Y column
+		heading. Then it enters a for loop where for each value of x it 
+		evaluates what y is, and then prints their values. There is a second
+		for loop that prints out the number of pound symbols equal to the y 
+		value. I initialized a maximum of 0 and a minimum of 100 before the
+		loop so that if at any point the program encounters a y value higher 
+		than 0 or lower than 100 it will assign that value to the max/min 
+		variables. This way, after the graph the program prints out the max and min
+		and the x values at which they occured. I verified the correctness
+		of this program by graphing it on my calculator and finding the max
+		and min for the specified domain, and the graph, max, and min all 
+		matched. 

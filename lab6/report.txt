@@ -1,0 +1,9 @@
+Brad Sherman
+Fundamentals of Computing 1
+Lab 6 Report
+
+This program starts by including the stdio and string libraries for some functions. Next, all the functions are declared. I have argc and argv as arguments in the main function so that the user can enter a startup file from the command line. Then the program determines whether or not the user actually entered a file on the command line. If not, it asks for the user to input a startup text file. Then it opens the file and I use the populate function to create the 2D array and count the number of rows (the number of sayings). The program then enters a while loop and displays the choices. Based on what number the user enters, the program will execute one of 4 different functions: disp_sayings, new_saying, list_saying, and new_file. These functions display all the settings, enter a new saying, list all the sayings with a certain word, and save the sayings in a new file, respectively. 
+
+From the user perspective, they can either enter a startup text file on the command line or once the program prompts them. As long as the the file is read in correctly, the user will see a menu displaying their choices. Choice 1 just displays the sayings, choice 2 prompts them to enter a new saying, choice 3 asks them what word they want to search for, and choice 4 asks them what file they want to save it in. The program will keep prompting them to choose an option until the user enters 5, at which time the program will terminate.
+
+I verified this program by making sure the program will correctly read in a file  typed in at the command line or once the program starts. I also tested all of the functions by using the more or cat functions (outside of the program) on the startup files I used to make sure that the outputs of my functions matched what was contained in the file. Once each function worked, I kept testing them with different inputs and different startup files.
