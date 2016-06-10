@@ -3,4 +3,6 @@ This is the repo for the course: Fundamentals of Computing 1, which I took durin
 
 Fundamentals of Computing 1 taught me the basics of programming while learning the C language.
 This was my first, programming course other than a few courses online at codecademy.com. This
-course gave me a solid foundation of the basic principles of programming.
+course gave me a solid foundation of the basic principles of programming. 
+
+** Note: In order to play Donkey Kong, the lucida sans typewriter font is required **
